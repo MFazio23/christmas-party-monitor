@@ -4,7 +4,9 @@ namespace ChristmasPartyMonitor.Utilities
 {
     public static class Config
     {
+        public static string FaceServiceApiRoot => ConfigurationManager.AppSettings["FaceServiceApiRoot"];
         public static string FaceServiceClientKey => ConfigurationManager.AppSettings["FaceServiceClientKey"];
+        public static string EmotionServiceApiRoot => ConfigurationManager.AppSettings["EmotionServiceApiRoot"];
         public static string EmotionServiceClientKey => ConfigurationManager.AppSettings["EmotionServiceClientKey"];
         public static float IdentifyConfidenceThreshold => float.Parse(ConfigurationManager.AppSettings["IdentifyConfidenceThreshold"]);
         public static string SlackMessageBaseUrl => ConfigurationManager.AppSettings["SlackMessageBaseUrl"];

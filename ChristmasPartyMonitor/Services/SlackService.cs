@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ChristmasPartyMonitor.Models;
+﻿using ChristmasPartyMonitor.Models;
 using ChristmasPartyMonitor.Utilities;
 using Newtonsoft.Json;
 using RestSharp;

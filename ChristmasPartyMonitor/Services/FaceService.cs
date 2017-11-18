@@ -33,7 +33,7 @@ namespace ChristmasPartyMonitor.Services
         {
             if (!string.IsNullOrEmpty(url))
                 return await this._faceServiceClient.DetectAsync(url, returnFaceAttributes: DefaultFaceAttributeTypes);
-
+            
             if (imageStream != null)
                 return await this._faceServiceClient.DetectAsync(imageStream, returnFaceAttributes: DefaultFaceAttributeTypes);
 
@@ -53,7 +53,11 @@ namespace ChristmasPartyMonitor.Services
 
             foreach (var identifyResult in identifyResults)
             {
-                persons.Add(await _faceServiceClient.GetPersonAsync(personGroupId, identifyResult.Candidates[0].PersonId));
+                if (identifyResult.Candidates.Any())
+                {
+                    persons.Add(await _faceServiceClient.GetPersonAsync(personGroupId,
+                        identifyResult.Candidates[0].PersonId));
+                }
             }
 
             if (persons.Any(p => p.Name.Equals("John Ptacek")))
@@ -118,7 +122,7 @@ namespace ChristmasPartyMonitor.Services
 
                 personEmotions.Add(new PersonEmotion
                 {
-                    Emotion = emotion.Scores.GetEmotion(),
+                    Emotion = emotion?.Scores?.GetEmotion() ?? new KeyValuePair<string, float>(),
                     PersonId = person?.PersonId ?? Guid.Empty,
                     Name = person?.Name ?? "Unknown Person",
                     UserData = person?.UserData ?? "N/A"

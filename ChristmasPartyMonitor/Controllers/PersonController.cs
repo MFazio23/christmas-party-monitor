@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using ChristmasPartyMonitor.Models;
+using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Face.Contract;
 
 namespace ChristmasPartyMonitor.Controllers
@@ -19,7 +20,7 @@ namespace ChristmasPartyMonitor.Controllers
         [HttpGet]
         public async Task<Person[]> ListPersonsInPersonGroup(string personGroupId)
         {
-            return await this.FaceServiceClient.GetPersonsAsync(personGroupId);
+            return await this.FaceServiceClient.ListPersonsAsync(personGroupId);
         }
 
         [HttpPost]
@@ -65,7 +66,9 @@ namespace ChristmasPartyMonitor.Controllers
 
                 foreach (var url in personToLoad.Urls)
                 {
-                    var addFaceResult = await this.FaceServiceClient.AddPersonFaceAsync(personGroupId, createPersonResult.PersonId, url);
+                    var addFaceResult =
+                        await this.FaceServiceClient.AddPersonFaceAsync(personGroupId, createPersonResult.PersonId,
+                            url);
                     personLoadResult.AddPersistedFaceId(addFaceResult.PersistedFaceId);
                 }
 

@@ -17,7 +17,7 @@ namespace ChristmasPartyMonitor.Services
 
         public EmotionService(EmotionServiceClient emotionServiceClient = null)
         {
-            _emotionServiceClient = emotionServiceClient ?? new EmotionServiceClient(Config.EmotionServiceClientKey);
+            _emotionServiceClient = emotionServiceClient ?? new EmotionServiceClient(Config.EmotionServiceClientKey, Config.EmotionServiceApiRoot);
         }
 
         public async Task<Emotion[]> GetEmotions(Stream imageStream = null, string url = null)

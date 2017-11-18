@@ -15,7 +15,7 @@ namespace ChristmasPartyMonitor.Controllers
 
         protected BaseController()
         {
-            this.FaceServiceClient = new FaceServiceClient(Config.FaceServiceClientKey);
+            this.FaceServiceClient = new FaceServiceClient(Config.FaceServiceClientKey, Config.FaceServiceApiRoot);
 
             this.EmotionService = new EmotionService();
             this.FaceService = new FaceService(this.FaceServiceClient);
